@@ -60,3 +60,65 @@ function operate(operator, a, b) {
             return null;
     }
 }
+
+// Append number on screen
+
+numbers.forEach(number => number.addEventListener("click", () => {
+    let num = number.textContent;
+    if (result.textContent.length <= 10) {
+        if (result.textContent === "0") {
+            result.textContent = num;
+        } else {
+            result.textContent += num;
+        }
+    } else {
+        alert(" Can't enter another number");
+    }
+}))
+
+
+
+// Add operation sign
+
+function add_operator(operator) {
+    if (current_operation !== null) calculate()
+    first_number = result.textContent;
+    current_operation = operator;
+    operation_screen.textContent = `${first_number} ${current_operation}`;
+    reset_screen = true;
+}
+
+function calculate() {
+    if (current_operation === null || reset_screen) return
+    second_number = result.textContent;
+    result = operate(current_operation, first_number, second_number);
+    operation_screen.textContent = `${first_number} ${current_operation}`;
+    current_operation = null;
+
+}
+
+operators.forEach((button) => button.addEventListener("click", add_operator(button.textContent)));
+
+
+
+
+// clear screen
+
+function clear_screen() {
+    operation_screen.textContent = " ";
+    result.textContent = "0";
+    current_operation = null;
+    first_number = " ";
+    second_number = " ";
+}
+
+clear_button.addEventListener("click", clear_screen);
+
+
+// Delete number
+
+function delete_number() {
+    result.textContent = result.textContent.toString().slice(0, -1);
+}
+
+delete_button.addEventListener("click", delete_number);
