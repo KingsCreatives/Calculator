@@ -70,13 +70,13 @@ footer {
     background-color: whitesmoke;
 }
 
+.buttons button.equals:focus {
+    background-color: slategrey;
+}
+
 .first-operation,
 .display-result {
     text-align: right;
-}
-
-.equals {
-    background-color: sandybrown;
 }
 
 .first-operation {

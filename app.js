@@ -101,7 +101,11 @@ clear_button.addEventListener('click', clear_screen);
 // Delete number
 
 function delete_number() {
-    main_screen.textContent = main_screen.textContent.toString().slice(0, -1);
+    if (main_screen.textContent === "0") {
+        main_screen.textContent = "0";
+    } else {
+        main_screen.textContent = main_screen.textContent.toString().slice(0, -1);
+    }
 }
 
 delete_button.addEventListener('click', delete_number);
