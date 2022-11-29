@@ -5,12 +5,12 @@ const delete_button = document.querySelector(".delete");
 const clear_button = document.querySelector(".clear");
 const decimal = document.querySelector(".dot");
 const equals_button = document.querySelector(".equals");
-const operation_screen = document.querySelector(".first-operation");
-const result = document.querySelector(".display-result");
+const top_screen = document.querySelector(".first-operation");
+const main_screen = document.querySelector(".display-result");
 
 // Store user inputs
-first_number = " ";
-second_number = " ";
+operand_one = " ";
+operand_two = " ";
 current_operation = null;
 reset_screen = false;
 
@@ -61,15 +61,21 @@ function operate(operator, a, b) {
     }
 }
 
+//Reset screen
+function resetScreen() {
+    main_screen.textContent = " ";
+    reset_screen = false;
+}
+
 // Append number on screen
 
 numbers.forEach(number => number.addEventListener("click", () => {
     let num = number.textContent;
-    if (result.textContent.length <= 10) {
-        if (result.textContent === "0") {
-            result.textContent = num;
+    if (main_screen.textContent.length <= 10) {
+        if (main_screen.textContent === "0") {
+            main_screen.textContent = num;
         } else {
-            result.textContent += num;
+            main_screen.textContent += num;
         }
     } else {
         alert(" Can't enter another number");
@@ -78,47 +84,36 @@ numbers.forEach(number => number.addEventListener("click", () => {
 
 
 
-// Add operation sign
-
-function add_operator(operator) {
-    if (current_operation !== null) calculate()
-    first_number = result.textContent;
-    current_operation = operator;
-    operation_screen.textContent = `${first_number} ${current_operation}`;
-    reset_screen = true;
-}
-
-function calculate() {
-    if (current_operation === null || reset_screen) return
-    second_number = result.textContent;
-    result = operate(current_operation, first_number, second_number);
-    operation_screen.textContent = `${first_number} ${current_operation}`;
-    current_operation = null;
-
-}
-
-operators.forEach((button) => button.addEventListener("click", add_operator(button.textContent)));
-
-
-
 
 // clear screen
 
 function clear_screen() {
-    operation_screen.textContent = " ";
-    result.textContent = "0";
+    top_screen.textContent = " ";
+    main_screen.textContent = "0";
     current_operation = null;
-    first_number = " ";
-    second_number = " ";
+    operand_one = " ";
+    operand_two = " ";
 }
 
 clear_button.addEventListener("click", clear_screen);
 
 
+
 // Delete number
 
 function delete_number() {
-    result.textContent = result.textContent.toString().slice(0, -1);
+    main_screen.textContent = main_screen.textContent.toString().slice(0, -1);
 }
 
 delete_button.addEventListener("click", delete_number);
+
+
+// Add decimal point
+function add_point() {
+    if (reset_screen) resetScreen();
+    if (main_screen.textContent === " ") main_screen.textContent = "0";
+    if (main_screen.textContent.includes(".")) return;
+    main_screen.textContent += ".";
+}
+
+decimal.addEventListener("click", add_point);
