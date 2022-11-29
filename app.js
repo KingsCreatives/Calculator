@@ -14,6 +14,10 @@ operand_two = " ";
 current_operation = null;
 reset_screen = false;
 
+
+
+
+
 //operation functions
 function add(first, second) {
     return first + second;
@@ -61,11 +65,18 @@ function operate(operator, a, b) {
     }
 }
 
+
+
+
 //Reset screen
 function resetScreen() {
     main_screen.textContent = " ";
     reset_screen = false;
 }
+
+
+
+
 
 // Append number on screen
 
@@ -99,6 +110,7 @@ clear_button.addEventListener("click", clear_screen);
 
 
 
+
 // Delete number
 
 function delete_number() {
@@ -106,6 +118,8 @@ function delete_number() {
 }
 
 delete_button.addEventListener("click", delete_number);
+
+
 
 
 // Add decimal point
@@ -117,3 +131,27 @@ function add_point() {
 }
 
 decimal.addEventListener("click", add_point);
+
+
+
+
+
+// Select an operator
+function select_operator(operator) {
+    if (current_operation !== null) evaluate();
+    operand_one = main_screen.textContent;
+    current_operation = operator;
+    reset_screen = true;
+    main_screen.textContent = " ";
+    top_screen.textContent = `${operand_one} ${current_operation}`;
+}
+
+operators.forEach((button) => button.addEventListener("click", () => {
+    select_operator(button.textContent);
+}));
+
+
+
+
+
+// Evaluate user operation
