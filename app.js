@@ -5,8 +5,13 @@ const delete_button = document.querySelector(".delete");
 const clear_button = document.querySelector(".clear");
 const decimal = document.querySelector(".dot");
 const equals_button = document.querySelector(".equals");
-const top_screen = document.querySelector(".first-operation");
-const main_screen = document.querySelector(".display-result");
+
+
+// Screens
+let top_screen = document.querySelector(".first-operation");
+let main_screen = document.querySelector(".display-result");
+
+
 
 // Store user inputs
 operand_one = " ";
@@ -42,6 +47,8 @@ function percentage(first, second) {
 function square(number) {
     return number * number;
 }
+
+
 
 function operate(operator, a, b) {
     a = Number(a);
@@ -142,8 +149,8 @@ function select_operator(operator) {
     operand_one = main_screen.textContent;
     current_operation = operator;
     reset_screen = true;
-    main_screen.textContent = " ";
     top_screen.textContent = `${operand_one} ${current_operation}`;
+    main_screen.textContent = " ";
 }
 
 operators.forEach((button) => button.addEventListener("click", () => {
@@ -155,3 +162,11 @@ operators.forEach((button) => button.addEventListener("click", () => {
 
 
 // Evaluate user operation
+
+function evaluate() {
+    operand_two = main_screen.textContent;
+    main_screen.textContent = operate(current_operation, operand_one, operand_two);
+    top_screen.textContent = `${operand_one} ${current_operation} ${operand_two} =`;
+}
+
+equals_button.addEventListener("click", evaluate);
