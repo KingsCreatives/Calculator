@@ -40,8 +40,8 @@ function divide(first, second) {
     return first / second;
 }
 
-function percentage(first, second) {
-    return (first / 100) * second;
+function percentage(first) {
+    return (first / 100);
 }
 
 function square(number) {
@@ -146,11 +146,16 @@ decimal.addEventListener("click", add_point);
 // Select an operator
 function select_operator(operator) {
     if (current_operation !== null) evaluate();
-    operand_one = main_screen.textContent;
-    current_operation = operator;
-    reset_screen = true;
-    top_screen.textContent = `${operand_one} ${current_operation}`;
-    main_screen.textContent = " ";
+    if (main_screen.textContent === "0") {
+        top_screen.textContent = " ";
+        alert("Enter a number first");
+    } else {
+        operand_one = main_screen.textContent;
+        current_operation = operator;
+        reset_screen = true;
+        top_screen.textContent = `${operand_one} ${current_operation}`;
+        main_screen.textContent = " ";
+    }
 }
 
 operators.forEach((button) => button.addEventListener("click", () => {
@@ -164,9 +169,21 @@ operators.forEach((button) => button.addEventListener("click", () => {
 // Evaluate user operation
 
 function evaluate() {
+    if (main_screen.textContent === "0" && current_operation === null) {
+        return alert("Please enter a number");
+    }
     operand_two = main_screen.textContent;
-    main_screen.textContent = operate(current_operation, operand_one, operand_two);
-    top_screen.textContent = `${operand_one} ${current_operation} ${operand_two} =`;
+    main_screen.textContent = round_answer(operate(current_operation, operand_one, operand_two));
+    top_screen.textContent = `${operand_one} ${current_operation} ${operand_two}`;
 }
 
 equals_button.addEventListener("click", evaluate);
+
+
+
+
+// Round evaluated answer
+function round_answer(answer) {
+    let rounded_answer = Math.round(answer * 1000) / 1000;
+    return rounded_answer;
+}

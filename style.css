@@ -44,6 +44,7 @@ footer {
 
 .display {
     width: 300px;
+    height: 135px;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -74,6 +75,10 @@ footer {
     text-align: right;
 }
 
+.equals {
+    background-color: sandybrown;
+}
+
 .first-operation {
     margin-bottom: 10px;
     padding-bottom: 15px;
@@ -82,6 +87,7 @@ footer {
 
 .display-result {
     font-size: 2.5rem;
+    padding-bottom: none;
 }
 
 .fab {
