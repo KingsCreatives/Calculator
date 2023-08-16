@@ -6,6 +6,12 @@ const clear_button = document.querySelector('.clear');
 const decimal = document.querySelector('.dot');
 const equals_button = document.querySelector('.equals');
 
+class Calculator{
+    constructor(){
+        
+    }
+}
+
 // Screens
 let top_screen = document.querySelector('.first-operation');
 let main_screen = document.querySelector('.display-result');
@@ -17,29 +23,72 @@ current_operation = null;
 reset_screen = false;
 
 //operation functions
-function add(first, second) {
-    return first + second;
+// function add(first, second) {
+//     return first + second;
+// }
+
+// function subtract(first, second) {
+//     return first - second;
+// }
+
+// function multiply(first, second) {
+//     return first * second;
+// }
+
+// function divide(first, second) {
+//     return first / second;
+// }
+
+// function percentage(first) {
+//     return first / 100;
+// }
+
+// function square(number) {
+//     return number * number;
+// }
+class Operations{
+    constructor(first,second){
+        this._first = first
+        this._second = second
+    }
+    get first(){
+        return this._first
+    }
+    get second(){
+        return this._second
+    }
+
+    add() {
+        return this.first + this.second;
+    }
+    
+    subtract() {
+        return this.first - this.second;
+    }
+    
+    multiply() {
+        return this.first * this.second;
+    }
+    
+    divide() {
+        return this.first / this.second;
+    }
+    
+    percentage() {
+        return this.first / 100;
+    }
+    
+    square(number) {
+        return number * number;
+    }
 }
 
-function subtract(first, second) {
-    return first - second;
-}
+// class PerformOperations{
+//     constructor(operator, a , b){
 
-function multiply(first, second) {
-    return first * second;
-}
 
-function divide(first, second) {
-    return first / second;
-}
-
-function percentage(first) {
-    return first / 100;
-}
-
-function square(number) {
-    return number * number;
-}
+//     }
+// }
 
 function operate(operator, a, b) {
     a = Number(a);
