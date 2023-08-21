@@ -94,19 +94,21 @@ function operate(operator, a, b) {
     a = Number(a);
     b = Number(b);
 
+    let operation = new Operations(a,b)
+
     switch (operator) {
         case '+':
-            return add(a, b);
+            return operation.add();
         case '-':
-            return subtract(a, b);
+            return operation.subtract();
         case '÷':
-            return divide(a, b);
+            return operation.divide();
         case '×':
-            return multiply(a, b);
+            return operation.multiply();
         case '%':
-            return percentage(a, b);
+            return operation.percentage();
         case 'x2':
-            return square(a);
+            return operation.square(a);
         default:
             return null;
     }
