@@ -20,8 +20,9 @@ class Calculator{
         let top_screen = document.querySelector('.first-operation');
         let main_screen = document.querySelector('.display-result');
 
-        this.top_screen = top_screen
+        
         this.main_screen = main_screen
+        this.top_screen = top_screen
 
         // Store user inputs
         let operand_one = ' ';
@@ -35,13 +36,35 @@ class Calculator{
         this.reset_screen = reset_screen
     }
 
+    // clear all numbers on screen
     clearScreen(){
         this.clear_button.addEventListener('click', function(){
             this.top_screen = document.querySelector('.first-operation').textContent = " ";
-            this.main_screen = '0';
+            document.querySelector('.display-result').textContent = '0'; /* main screen - must refactor it */
             this.current_operation = null;
             this.operand_one = ' ';
             this.operand_two = ' ';
+        })
+    }
+
+    // Display numbers on screen
+    displayNumber(){
+        let numbers = this.numbers
+        let main_screen = this.main_screen
+
+        numbers.forEach(number =>{
+            number.addEventListener('click', () => {
+                        let num = number.textContent;
+                        if (main_screen.textContent.length <= 10) {
+                            if (main_screen.textContent === '0') {
+                                main_screen.textContent = num;
+                            } else {
+                                main_screen.textContent += num;
+                            }
+                        } else {
+                            alert(" Can't enter another number");
+                        }
+                    })
         })
     }
 
@@ -50,6 +73,7 @@ class Calculator{
 
 let cal = new Calculator()
 cal.clearScreen();
+cal.displayNumber()
 
 
 
@@ -147,17 +171,7 @@ function resetScreen() {
 //     })
 // );
 
-// clear screen
 
-// function clear_screen() {
-//     top_screen.textContent = ' ';
-//     main_screen.textContent = '0';
-//     current_operation = null;
-//     operand_one = ' ';
-//     operand_two = ' ';
-// }
-
-// clear_button.addEventListener('click', clear_screen);
 
 // Delete number
 
