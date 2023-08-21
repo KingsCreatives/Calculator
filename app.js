@@ -10,10 +10,11 @@ class Calculator{
 
         this.numbers = numbers
         this.operators = operators
-        this.delete_button = delete_button
+        this.delete_button = document.querySelector('.delete');
         this.clear_button = clear_button
         this.decimal = decimal
         this.equals_button = equals_button
+        
 
 
         // Screens
@@ -38,9 +39,12 @@ class Calculator{
 
     // clear all numbers on screen
     clearScreen(){
+           let top_screen = this.top_screen
+           let main_screen = this.main_screen
+
         this.clear_button.addEventListener('click', function(){
-            this.top_screen = document.querySelector('.first-operation').textContent = " ";
-            document.querySelector('.display-result').textContent = '0'; /* main screen - must refactor it */
+            top_screen.textContent = " ";
+            main_screen.textContent = '0'; /* main screen - must refactor it */
             this.current_operation = null;
             this.operand_one = ' ';
             this.operand_two = ' ';
@@ -68,12 +72,26 @@ class Calculator{
         })
     }
 
+    // Delete number from screen 
+    deleteNumbers(){
+        let deleteBtn = this.delete_button
+        let main_screen = this.main_screen
+        deleteBtn.addEventListener('click', function(){
+            if(main_screen.textContent === 0){
+                main_screen.textContent = 0
+            }else{
+                main_screen.textContent = main_screen.textContent.toString().slice(0, -1);
+            }
+        })
+    }
+
 
 }
 
 let cal = new Calculator()
 cal.clearScreen();
 cal.displayNumber()
+cal.deleteNumbers()
 
 
 
@@ -153,23 +171,6 @@ function resetScreen() {
     main_screen.textContent = ' ';
     reset_screen = false;
 }
-
-// Append number on screen
-
-// numbers.forEach((number) =>
-//     number.addEventListener('click', () => {
-//         let num = number.textContent;
-//         if (main_screen.textContent.length <= 10) {
-//             if (main_screen.textContent === '0') {
-//                 main_screen.textContent = num;
-//             } else {
-//                 main_screen.textContent += num;
-//             }
-//         } else {
-//             alert(" Can't enter another number");
-//         }
-//     })
-// );
 
 
 
