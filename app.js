@@ -8,9 +8,10 @@ class Calculator{
         const decimal = document.querySelector('.dot');
         const equals_button = document.querySelector('.equals');
 
+        // Get buttons on screen
         this.numbers = numbers
         this.operators = operators
-        this.delete_button = document.querySelector('.delete');
+        this.delete_button = delete_button
         this.clear_button = clear_button
         this.decimal = decimal
         this.equals_button = equals_button
@@ -21,7 +22,7 @@ class Calculator{
         let top_screen = document.querySelector('.first-operation');
         let main_screen = document.querySelector('.display-result');
 
-        
+        // Get Screen 
         this.main_screen = main_screen
         this.top_screen = top_screen
 
@@ -31,6 +32,7 @@ class Calculator{
         let current_operation = null;
         let reset_screen = false;
 
+        // Get users inputs
         this.operand_one = operand_one
         this.operand_two = operand_two
         this.current_operation = current_operation
@@ -85,6 +87,24 @@ class Calculator{
         })
     }
 
+    // Add Decimal Points
+    addDecimalPoint(){
+        let main_screen = this.main_screen
+        let reset_screen = this.reset_screen
+
+        function resetScreen(){
+            main_screen.textContent = ' ';
+            reset_screen = false;
+        }
+
+        this.decimal.addEventListener('click', function(){
+            if (reset_screen) resetScreen();
+            if (main_screen.textContent === ' ') main_screen.textContent = '0';
+            if (main_screen.textContent.includes('.')) return;
+            main_screen.textContent += '.';
+        })
+    }
+
 
 }
 
@@ -92,6 +112,7 @@ let cal = new Calculator()
 cal.clearScreen();
 cal.displayNumber()
 cal.deleteNumbers()
+cal.addDecimalPoint()
 
 
 
@@ -174,24 +195,12 @@ function resetScreen() {
 
 
 
-// Delete number
-
-// function delete_number() {
-//     if (main_screen.textContent === "0") {
-//         main_screen.textContent = "0";
-//     } else {
-//         main_screen.textContent = main_screen.textContent.toString().slice(0, -1);
-//     }
-// }
-
-// delete_button.addEventListener('click', delete_number);
-
 // // Add decimal point
 // function add_point() {
-//     if (reset_screen) resetScreen();
-//     if (main_screen.textContent === ' ') main_screen.textContent = '0';
-//     if (main_screen.textContent.includes('.')) return;
-//     main_screen.textContent += '.';
+    // if (reset_screen) resetScreen();
+    // if (main_screen.textContent === ' ') main_screen.textContent = '0';
+    // if (main_screen.textContent.includes('.')) return;
+    // main_screen.textContent += '.';
 // }
 
 // decimal.addEventListener('click', add_point);
