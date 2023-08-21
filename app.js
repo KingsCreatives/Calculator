@@ -112,10 +112,12 @@ class Calculator{
             let top_screen = this.top_screen
             let operand_one = this.operand_one
             let reset_screen = this.reset_screen
+            let operators = this.operators
+            let evaluate = this.evaluate()
 
             // Select an operator
         function select_operator(operator){
-            // if (current_operation !== null) evaluate(); 
+            if (current_operation !== null) evaluate;
             if (main_screen.textContent === '0') {
                 top_screen.textContent = ' ';
                 alert('Enter a number first');
@@ -125,14 +127,45 @@ class Calculator{
                 reset_screen = true;
                 top_screen.textContent = `${operand_one} ${current_operation}`;
                 main_screen.textContent = ' ';
-            }
+            }}
+
+    operators.forEach(operator =>{
+        operator.addEventListener('click', () =>{
+            select_operator(operator.textContent)
+        })
+    })
+}
+
+// Evaluate Operation
+evaluate(){
+    let equalsBtn = this.equals_button
+    let main_screen = this.main_screen
+    let current_operation = this.current_operation
+    let operand_one = this.operand_one
+    let operand_two = this.operand_two
+    let top_screen = this.top_screen
+
+    // Get Answer from opeation
+   function evaluateOperation(){
+    if (main_screen.textContent === '0' && current_operation === null) {
+        return alert('Please enter a number');
     }
+    operand_two = main_screen.textContent;
+    main_screen.textContent =new PerformOperation(current_operation, operand_one, operand_two).operate();
+    top_screen.textContent = `${operand_one} ${current_operation} ${operand_two}`;
+   }
+   
+   // Round answers
+   function round_answer(answer){
+    let roundedAnswer = Math.random(answer * 1000) / 1000
+    return roundedAnswer
+   }
 
-    this.operators.forEach(operator =>{
-        operator.addEventListener('click', select_operator(operator.textContent))
-    })}
+   equalsBtn.addEventListener('click', evaluateOperation())
+}
 
-
+// Get answer on click
+ 
 }
 
 let cal = new Calculator()
@@ -140,6 +173,8 @@ cal.clearScreen();
 cal.displayNumber()
 cal.deleteNumbers()
 cal.addDecimalPoint()
+cal.getOperator()
+cal.evaluate()
 
 
 
