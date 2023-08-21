@@ -105,6 +105,33 @@ class Calculator{
         })
     }
 
+    // Select Operator
+    getOperator(){
+            let current_operation = this.current_operation
+            let main_screen = this.main_screen
+            let top_screen = this.top_screen
+            let operand_one = this.operand_one
+            let reset_screen = this.reset_screen
+
+            // Select an operator
+        function select_operator(operator){
+            // if (current_operation !== null) evaluate(); 
+            if (main_screen.textContent === '0') {
+                top_screen.textContent = ' ';
+                alert('Enter a number first');
+            } else {
+                operand_one = main_screen.textContent;
+                current_operation = operator;
+                reset_screen = true;
+                top_screen.textContent = `${operand_one} ${current_operation}`;
+                main_screen.textContent = ' ';
+            }
+    }
+
+    this.operators.forEach(operator =>{
+        operator.addEventListener('click', select_operator(operator.textContent))
+    })}
+
 
 }
 
@@ -186,38 +213,19 @@ class PerformOperation{
     }
 }
 
-
-//Reset screen
-function resetScreen() {
-    main_screen.textContent = ' ';
-    reset_screen = false;
-}
-
-
-
-// // Add decimal point
-// function add_point() {
-    // if (reset_screen) resetScreen();
-    // if (main_screen.textContent === ' ') main_screen.textContent = '0';
-    // if (main_screen.textContent.includes('.')) return;
-    // main_screen.textContent += '.';
-// }
-
-// decimal.addEventListener('click', add_point);
-
 // // Select an operator
 // function select_operator(operator) {
-//     if (current_operation !== null) evaluate();
-//     if (main_screen.textContent === '0') {
-//         top_screen.textContent = ' ';
-//         alert('Enter a number first');
-//     } else {
-//         operand_one = main_screen.textContent;
-//         current_operation = operator;
-//         reset_screen = true;
-//         top_screen.textContent = `${operand_one} ${current_operation}`;
-//         main_screen.textContent = ' ';
-//     }
+    // if (current_operation !== null) evaluate();
+    // if (main_screen.textContent === '0') {
+    //     top_screen.textContent = ' ';
+    //     alert('Enter a number first');
+    // } else {
+    //     operand_one = main_screen.textContent;
+    //     current_operation = operator;
+    //     reset_screen = true;
+    //     top_screen.textContent = `${operand_one} ${current_operation}`;
+    //     main_screen.textContent = ' ';
+    // }
 // }
 
 // operators.forEach((button) =>
