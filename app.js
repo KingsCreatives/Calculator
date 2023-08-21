@@ -1,26 +1,44 @@
-// Buttons on page
-const numbers = document.querySelectorAll('[data-num]');
-const operators = document.querySelectorAll('[data-operation]');
-const delete_button = document.querySelector('.delete');
-const clear_button = document.querySelector('.clear');
-const decimal = document.querySelector('.dot');
-const equals_button = document.querySelector('.equals');
-
 class Calculator{
     constructor(){
-        
+        // Buttons on page
+        const numbers = document.querySelectorAll('[data-num]');
+        const operators = document.querySelectorAll('[data-operation]');
+        const delete_button = document.querySelector('.delete');
+        const clear_button = document.querySelector('.clear');
+        const decimal = document.querySelector('.dot');
+        const equals_button = document.querySelector('.equals');
+
+        this.numbers = numbers
+        this.operators = operators
+        this.delete_button = delete_button
+        this.clear_button = clear_button
+        this.decimal = decimal
+        this.equals_button = equals_button
+
+
+        // Screens
+        let top_screen = document.querySelector('.first-operation');
+        let main_screen = document.querySelector('.display-result');
+
+        this.top_screen = top_screen
+        this.main_screen = main_screen
+
+        // Store user inputs
+        let operand_one = ' ';
+        let operand_two = ' ';
+        let current_operation = null;
+        let reset_screen = false;
+
+        this.operand_one = operand_one
+        this.operand_two = operand_two
+        this.current_operation = current_operation
+        this.reset_screen = reset_screen
     }
+
+    
 }
 
-// Screens
-let top_screen = document.querySelector('.first-operation');
-let main_screen = document.querySelector('.display-result');
 
-// Store user inputs
-operand_one = ' ';
-operand_two = ' ';
-current_operation = null;
-reset_screen = false;
 
 
 class Operations{
@@ -62,7 +80,7 @@ class Operations{
 
 
 
-class Operate{
+class PerformOperation{
     constructor(operator,a,b){
         
         this.operator = operator
@@ -178,7 +196,7 @@ function evaluate() {
         return alert('Please enter a number');
     }
     operand_two = main_screen.textContent;
-    main_screen.textContent = round_answer(new Operate(current_operation, operand_one, operand_two).operate());
+    main_screen.textContent = round_answer(new PerformOperation(current_operation, operand_one, operand_two).operate());
     top_screen.textContent = `${operand_one} ${current_operation} ${operand_two}`;
 }
 
