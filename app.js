@@ -22,30 +22,7 @@ operand_two = ' ';
 current_operation = null;
 reset_screen = false;
 
-//operation functions
-// function add(first, second) {
-//     return first + second;
-// }
 
-// function subtract(first, second) {
-//     return first - second;
-// }
-
-// function multiply(first, second) {
-//     return first * second;
-// }
-
-// function divide(first, second) {
-//     return first / second;
-// }
-
-// function percentage(first) {
-//     return first / 100;
-// }
-
-// function square(number) {
-//     return number * number;
-// }
 class Operations{
     constructor(first,second){
         this._first = first
@@ -83,36 +60,38 @@ class Operations{
     }
 }
 
-// class PerformOperations{
-//     constructor(operator, a , b){
 
 
-//     }
-// }
+class Operate{
+    constructor(operator,a,b){
+        
+        this.operator = operator
+        this.a = Number(a)
+        this.b = Number(b)
+    }
 
-function operate(operator, a, b) {
-    a = Number(a);
-    b = Number(b);
-
-    let operation = new Operations(a,b)
-
-    switch (operator) {
-        case '+':
-            return operation.add();
-        case '-':
-            return operation.subtract();
-        case '÷':
-            return operation.divide();
-        case '×':
-            return operation.multiply();
-        case '%':
-            return operation.percentage();
-        case 'x2':
-            return operation.square(a);
-        default:
-            return null;
+    operate(){
+        let operation = new Operations(this.a, this.b)
+        
+        switch (this.operator) {
+            case '+':
+                return operation.add();
+            case '-':
+                return operation.subtract();
+            case '÷':
+                return operation.divide();
+            case '×':
+                return operation.multiply();
+            case '%':
+                return operation.percentage();
+            case 'x2':
+                return operation.square(a);
+            default:
+                return null;
+        }
     }
 }
+
 
 //Reset screen
 function resetScreen() {
@@ -199,7 +178,7 @@ function evaluate() {
         return alert('Please enter a number');
     }
     operand_two = main_screen.textContent;
-    main_screen.textContent = round_answer(operate(current_operation, operand_one, operand_two));
+    main_screen.textContent = round_answer(new Operate(current_operation, operand_one, operand_two).operate());
     top_screen.textContent = `${operand_one} ${current_operation} ${operand_two}`;
 }
 
