@@ -101,6 +101,24 @@ class Evaluate{
 }
 
 class Calculator{
+//  Displat nums
+displayNums(){
+    numbers.forEach((number) =>
+    number.addEventListener('click', () => {
+        let num = number.textContent;
+        if (main_screen.textContent.length <= 10) {
+            if (main_screen.textContent === '0') {
+                main_screen.textContent = num;
+            } else {
+                main_screen.textContent += num;
+            }
+        } else {
+            alert(" Can't enter another number");
+        }
+    })
+);
+}
+
 //    clear screen
     clear_screen(){
         function clear_screen() {
@@ -155,6 +173,7 @@ new Calculator().clear_screen()
 new Calculator().deleteNum()
 new Calculator().decimal()
 new Calculator().result()
+new Calculator().displayNums()
 
 
 //Reset screen
@@ -165,20 +184,7 @@ function resetScreen() {
 
 // Append number on screen
 
-numbers.forEach((number) =>
-    number.addEventListener('click', () => {
-        let num = number.textContent;
-        if (main_screen.textContent.length <= 10) {
-            if (main_screen.textContent === '0') {
-                main_screen.textContent = num;
-            } else {
-                main_screen.textContent += num;
-            }
-        } else {
-            alert(" Can't enter another number");
-        }
-    })
-);
+
 
 
 // Select an operator
@@ -202,6 +208,12 @@ operators.forEach((button) =>
     })
 );
 
+
+// Round evaluated answer
+// function round_answer(answer) {
+//     let rounded_answer = Math.round(answer * 1000) / 1000;
+//     return rounded_answer;
+// }
 
 // Keyboard Inputs
 function keys(event) {
