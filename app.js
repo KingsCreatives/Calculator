@@ -86,6 +86,77 @@ class PerformOperation{
     }
 }
 
+class Evaluate{
+    // Round answer
+    round_answer(answer){
+        let rounded_answer = Math.round(answer * 1000) / 1000;
+        return rounded_answer;
+    }
+    // Evaluate Operation
+    evaluate(){
+        operand_two = main_screen.textContent;
+        main_screen.textContent = this.round_answer((new PerformOperation(current_operation, operand_one, operand_two).operate()));
+        top_screen.textContent = `${operand_one} ${current_operation} ${operand_two}`;
+    }
+}
+
+class Calculator{
+//    clear screen
+    clear_screen(){
+        function clear_screen() {
+            top_screen.textContent = ' ';
+            main_screen.textContent = '0';
+            current_operation = null;
+            operand_one = ' ';
+            operand_two = ' ';
+        }
+        
+        clear_button.addEventListener('click', clear_screen);
+    }
+
+    // delete numbers
+    deleteNum(){
+        function delete_number() {
+            if (main_screen.textContent === "0") {
+                main_screen.textContent = "0";
+            } else {
+                main_screen.textContent = main_screen.textContent.toString().slice(0, -1);
+            }
+        }
+        
+        delete_button.addEventListener('click', delete_number);
+    }
+
+    // Add decimal point
+    decimal(){
+        function add_point() {
+            if (reset_screen) resetScreen();
+            if (main_screen.textContent === ' ') main_screen.textContent = '0';
+            if (main_screen.textContent.includes('.')) return;
+            main_screen.textContent += '.';
+        }
+        
+        decimal.addEventListener('click', add_point);
+    }
+
+    // Display Answer
+    result(){
+        equals_button.addEventListener('click', () =>{
+            if (main_screen.textContent === '0' && current_operation === null) {
+                return alert('Please enter a number');
+            }
+            new Evaluate().evaluate()
+        });
+    }
+
+}
+
+new Calculator().clear_screen()
+new Calculator().deleteNum()
+new Calculator().decimal()
+new Calculator().result()
+
+
 //Reset screen
 function resetScreen() {
     main_screen.textContent = ' ';
@@ -109,39 +180,6 @@ numbers.forEach((number) =>
     })
 );
 
-// clear screen
-
-function clear_screen() {
-    top_screen.textContent = ' ';
-    main_screen.textContent = '0';
-    current_operation = null;
-    operand_one = ' ';
-    operand_two = ' ';
-}
-
-clear_button.addEventListener('click', clear_screen);
-
-// Delete number
-
-function delete_number() {
-    if (main_screen.textContent === "0") {
-        main_screen.textContent = "0";
-    } else {
-        main_screen.textContent = main_screen.textContent.toString().slice(0, -1);
-    }
-}
-
-delete_button.addEventListener('click', delete_number);
-
-// Add decimal point
-function add_point() {
-    if (reset_screen) resetScreen();
-    if (main_screen.textContent === ' ') main_screen.textContent = '0';
-    if (main_screen.textContent.includes('.')) return;
-    main_screen.textContent += '.';
-}
-
-decimal.addEventListener('click', add_point);
 
 // Select an operator
 function select_operator(operator) {
@@ -164,24 +202,6 @@ operators.forEach((button) =>
     })
 );
 
-// Evaluate user operation
-
-function evaluate() {
-    if (main_screen.textContent === '0' && current_operation === null) {
-        return alert('Please enter a number');
-    }
-    operand_two = main_screen.textContent;
-    main_screen.textContent = round_answer(operate(current_operation, operand_one, operand_two));
-    top_screen.textContent = `${operand_one} ${current_operation} ${operand_two}`;
-}
-
-equals_button.addEventListener('click', evaluate);
-
-// Round evaluated answer
-function round_answer(answer) {
-    let rounded_answer = Math.round(answer * 1000) / 1000;
-    return rounded_answer;
-}
 
 // Keyboard Inputs
 function keys(event) {
@@ -217,7 +237,7 @@ function keys(event) {
             main_screen.textContent = "0";
             alert("Enter an operator");
         }
-        evaluate()
+        new Evaluate().evaluate()
     }
 
     if (input === "+" ||
