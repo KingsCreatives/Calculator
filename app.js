@@ -182,14 +182,10 @@ function resetScreen() {
     reset_screen = false;
 }
 
-// Append number on screen
-
-
-
 
 // Select an operator
 function select_operator(operator) {
-    if (current_operation !== null) evaluate();
+    if (current_operation !== null) new Evaluate().evaluate();
     if (main_screen.textContent === '0') {
         top_screen.textContent = ' ';
         alert('Enter a number first');
@@ -208,12 +204,6 @@ operators.forEach((button) =>
     })
 );
 
-
-// Round evaluated answer
-// function round_answer(answer) {
-//     let rounded_answer = Math.round(answer * 1000) / 1000;
-//     return rounded_answer;
-// }
 
 // Keyboard Inputs
 function keys(event) {
